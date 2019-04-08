@@ -8,12 +8,12 @@ jsonfile='/tmp/antigate_upload.json'
 olddigest="$(echo $PASS | gpg -d --cipher-algo AES256 --batch --yes --passphrase-fd 0 \"${digest_path}.gpg\")"
 
 # hash check
-hashcheck="$(echo "$olddigest" | /usr/local/bin/shasum -c | grep FAILED)"
+hashcheck="$(echo -e "$olddigest" | /usr/local/bin/shasum -c | grep FAILED)"
 newdigest="$(find $target_path -type f \( -name '*.php' -o -name '*.cgi' -o -name '*.shtml' -o -name '*.shtm' -o -name '.htaccess' \) -print0 | xargs -0 /usr/local/bin/shasum)"
 
-diff="$(diff -u <(echo \"$olddigest\") <(echo \"$newdigest\"))"
+diff="$(diff -u <(echo -e \"$olddigest\") <(echo -e \"$newdigest\"))"
 
-echo "$newdigest" > "$digest_path"
+echo -e "$newdigest" > "$digest_path"
 echo $PASS | gpg -c --cipher-algo AES256 --batch --yes --passphrase-fd 0 "$digest_path"
 rm -f "$digest_path"
 

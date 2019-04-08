@@ -1,6 +1,6 @@
 #!/bin/bash
 target_path="$HOME/www/"
-digest_path='/tmp/antigate_site_digests.txt'
+digest_path="$HOME/antigate_site_digests.txt"
 host="$(basename $HOME)@sakura"
 tmptext='/tmp/antigate_tmp.txt'
 jsonfile='/tmp/antigate_upload.json'

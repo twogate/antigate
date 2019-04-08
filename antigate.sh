@@ -10,6 +10,8 @@ olddigest="$(echo $PASS | gpg -d --cipher-algo AES256 --batch --yes --passphrase
 # hash check
 hashcheck="$(echo -e "$olddigest" | /usr/local/bin/shasum -c | grep FAILED)"
 newdigest="$(find $target_path -type f \( -name '*.php' -o -name '*.cgi' -o -name '*.shtml' -o -name '*.shtm' -o -name '.htaccess' \) -print0 | xargs -0 /usr/local/bin/shasum)"
+echo $olddigest
+echo $newdigest
 
 diff="$(diff -u <(echo -e \"$olddigest\") <(echo -e \"$newdigest\"))"
 

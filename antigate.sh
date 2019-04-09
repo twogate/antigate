@@ -25,6 +25,6 @@ sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g' $tmptext >> $jsonfile
 echo "\", \"icon_emoji\": \":ghost:\"}" >> $jsonfile
 
 if [ -n "$diff" ]; then
-  /usr/local/bin/curl -X POST -H 'Content-type: application/json' https://hooks.slack.com/services/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 --data @"$jsonfile"
+  /usr/local/bin/curl -X POST -H 'Content-type: application/json' "$SLACK" --data @"$jsonfile"
 fi
 

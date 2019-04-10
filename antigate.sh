@@ -2,8 +2,8 @@
 target_path="$HOME/www/"
 digest_path="$HOME/antigate_site_digests.txt"
 host="$(basename $HOME)@sakura"
-tmptext='/tmp/antigate_tmp.txt'
-jsonfile='/tmp/antigate_upload.json'
+tmptext="$HOME/antigate_tmp.txt"
+jsonfile="$HOME/antigate_upload.json"
 
 cp -f $digest_path ${digest_path}.old
 
@@ -27,4 +27,7 @@ echo "\", \"icon_emoji\": \":ghost:\"}" >> $jsonfile
 if [ -n "$diff" ]; then
   /usr/local/bin/curl -X POST -H 'Content-type: application/json' "$SLACK" --data @"$jsonfile"
 fi
+
+rm -f "$tmptext"
+rm -f "$jsonfile"
 
